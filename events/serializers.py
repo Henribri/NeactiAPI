@@ -9,4 +9,10 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'title',
                   'subtitle',
-                  'date')
+                  'date',
+                  'time',
+                  'address',
+                  'act_people',
+                  'all_people',
+                  'description'
+                  )
