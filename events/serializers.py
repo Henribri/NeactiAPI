@@ -14,5 +14,6 @@ class EventSerializer(serializers.ModelSerializer):
                   'address',
                   'act_people',
                   'all_people',
-                  'description'
+                  'description',
+                  'category'
                   )
