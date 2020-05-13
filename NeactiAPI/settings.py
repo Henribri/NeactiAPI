@@ -27,8 +27,7 @@ SECRET_KEY = 'v3kna06pg*ipy2486cr6ir%z9k^0r=%7*9(#i+8-qszc#6u@+='
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '10.0.2.2',
-    'localhost'
+    '*'
 ]
 
 
@@ -113,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 

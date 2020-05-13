@@ -1,10 +1,11 @@
 from django.db import models
 from datetime import datetime 
+from django.utils import timezone
 
 
 class ActualEvents(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(date__gte=datetime.today())
+        return super().get_queryset().filter(date_time__gte=timezone.now())
 
 
 
@@ -12,8 +13,7 @@ class ActualEvents(models.Manager):
 class Event(models.Model):
     title=models.CharField(max_length=30, default='Event')
     subtitle=models.CharField(max_length=50, default='No subtitle')
-    date=models.DateField(default= datetime.date(datetime.now()))
-    time=models.TimeField(default= datetime.time(datetime.now()))
+    date_time=models.DateTimeField(default= timezone.now)
     address=models.CharField(max_length=50, default='No address')
     act_people=models.IntegerField(default=0)
     all_people=models.IntegerField(default=0)
