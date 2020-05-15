@@ -13,12 +13,12 @@ class ActualEvents(models.Manager):
 class Event(models.Model):
     title=models.CharField(max_length=30, default='Event')
     subtitle=models.CharField(max_length=50, default='No subtitle')
-    date_time=models.DateTimeField()
+    date_time=models.DateTimeField(default=timezone.now)
     address=models.CharField(max_length=50, default='No address')
     act_people=models.IntegerField(default=0)
     all_people=models.IntegerField(default=0)
     description=models.CharField(max_length=100, default='No description')
-    category=models.CharField(max_length=30, default='No category')
+    category=models.IntegerField(default=0)
 
     objects = models.Manager()
     actual_events=ActualEvents()
