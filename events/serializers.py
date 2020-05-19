@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from events.models import Event
+from events.models import Event, Category
 
  
 class CategorySerializer(serializers.Serializer):
