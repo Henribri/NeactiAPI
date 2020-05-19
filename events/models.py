@@ -3,10 +3,11 @@ from django.utils import timezone
 from djongo import models
 
 class Category(models.Model):
-    c_name=models.CharField(default='Sport', max_length=100)
-    c_iconId=models.IntegerField(default=57392)
-    c_fontFamily=models.CharField(default='MaterialIcons',max_length=100)
-    c_fontPackage=models.CharField(null=True, max_length=100)
+    name=models.CharField(default='Sport', max_length=100)
+    iconId=models.IntegerField(default=57392)
+    fontFamily=models.CharField(default='MaterialIcons',max_length=100)
+    fontPackage=models.CharField(null=True, max_length=100)
+    objects = models.DjongoManager()
 
     class Meta:
         abstract=True
@@ -25,8 +26,8 @@ class Event(Category):
     act_people=models.IntegerField(default=0)
     all_people=models.IntegerField(default=0)
     description=models.CharField(max_length=100, default='No description')
-
-
+    
+    #Category
 
     objects = models.DjongoManager()
     actual_events=ActualEvents()
