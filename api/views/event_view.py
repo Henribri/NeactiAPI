@@ -1,5 +1,5 @@
-from events.models import Event
-from events.serializers import EventSerializer
+from api.models.event_model import Event
+from api.serializers.event_serializer import EventSerializer
 from rest_framework import generics
 from datetime import datetime 
 

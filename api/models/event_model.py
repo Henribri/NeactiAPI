@@ -2,15 +2,6 @@ from datetime import datetime
 from django.utils import timezone
 from djongo import models
 
-class Category(models.Model):
-    name=models.CharField(default='Sport', max_length=100)
-    iconId=models.IntegerField(default=57392)
-    fontFamily=models.CharField(default='MaterialIcons',max_length=100)
-    fontPackage=models.CharField(null=True, max_length=100)
-    objects = models.DjongoManager()
-
-    class Meta:
-        abstract=True
 
 class ActualEvents(models.Manager):
     def get_queryset(self):
@@ -18,7 +9,7 @@ class ActualEvents(models.Manager):
 
 
 # Create your models here.
-class Event(Category):
+class Event(models.Model):
     title=models.CharField(max_length=30, default='Event')
     subtitle=models.CharField(max_length=50, default='No subtitle')
     date_time=models.DateTimeField(default=timezone.now)
@@ -26,8 +17,7 @@ class Event(Category):
     act_people=models.IntegerField(default=0)
     all_people=models.IntegerField(default=0)
     description=models.CharField(max_length=100, default='No description')
-    
-    #Category
+    category=models.IntegerField(default=1)
 
     objects = models.DjongoManager()
     actual_events=ActualEvents()
