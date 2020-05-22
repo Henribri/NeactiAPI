@@ -1,8 +1,8 @@
 
-from rest_framework import serializers 
+from rest_framework_mongoengine import serializers 
 from api.models.category_model import Category
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.DocumentSerializer):
 
     class Meta:
         model = Category

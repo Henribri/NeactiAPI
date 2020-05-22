@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 
 from pathlib import Path
-
+import mongoengine
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -80,15 +80,17 @@ WSGI_APPLICATION = 'NeactiAPI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Neacti',
-        'HOST': '127.0.0.1',
-        'PORT': 27017,
-        'ENFORCE_SCHEMA': False,
+        'ENGINE': '',
+        #'NAME': 'Neacti',
+        #'HOST': '127.0.0.1',
+        #'PORT': 27017,
+        #'ENFORCE_SCHEMA': False,
         
     }
 }
 
+
+mongoengine.connect('Neacti')
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators

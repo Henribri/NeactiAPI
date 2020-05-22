@@ -1,9 +1,9 @@
-from rest_framework import serializers 
+from rest_framework_mongoengine import serializers 
 from api.models.event_model import Event
 
 
 
-class EventSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.DocumentSerializer):
 
     class Meta:
         model = Event
