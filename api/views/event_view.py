@@ -3,6 +3,7 @@ from api.serializers.event_serializer import EventSerializer
 from rest_framework import generics
 from datetime import datetime 
 
+
 class EventList(generics.ListCreateAPIView):
     queryset = Event.actual_events.all()
     serializer_class = EventSerializer
