@@ -11,7 +11,7 @@ class Event(Document):
     subtitle=StringField(max_length=50, default='No subtitle')
     date_time=DateTimeField(default=timezone.now)
     address=StringField(max_length=50, default='No address')
-    act_people=ListField(default=[])
+    act_people=ListField(StringField(max_length=100), default=[])
     all_people=IntField(default=0)
     description=StringField(max_length=100, default='No description')
     category=ReferenceField(Category)
