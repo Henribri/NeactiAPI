@@ -1,15 +1,27 @@
 from api.models.event_model import Event
-from api.serializers.event_serializer import EventSerializer
+from api.serializers.event_serializer import GetEventSerializer, EventSerializer
 from rest_framework import generics
 from datetime import datetime 
 from django.utils import timezone
 
 
 class EventList(generics.ListCreateAPIView):
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return GetEventSerializer
+        if self.request.method == 'POST':
+            return EventSerializer
+        return EventSerializer 
     queryset = Event.objects(date_time__gte=timezone.now()).all()
-    serializer_class = EventSerializer
+
+
+
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return GetEventSerializer
+        return EventSerializer 
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+
 
