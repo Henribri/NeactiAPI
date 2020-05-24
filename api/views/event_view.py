@@ -5,6 +5,10 @@ from datetime import datetime
 from django.utils import timezone
 
 
+
+#-- Specifies the query and the serializer to use
+#-- in function of the type of the request for Event
+
 class EventList(generics.ListCreateAPIView):
     def get_serializer_class(self):
         if self.request.method == 'GET':

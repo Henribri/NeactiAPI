@@ -4,7 +4,7 @@ from mongoengine import *
 from api.models.category_model import Category
 
 
-
+#-- Event model
 
 class Event(Document):
     title=StringField(max_length=30, default='Event')
