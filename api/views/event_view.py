@@ -10,6 +10,7 @@ from django.utils import timezone
 #-- in function of the type of the request for Event
 
 class EventList(generics.ListCreateAPIView):
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetEventSerializer
@@ -17,6 +18,10 @@ class EventList(generics.ListCreateAPIView):
             return EventSerializer
         return EventSerializer 
     queryset = Event.objects(date_time__gte=timezone.now()).all()
+    
+    def get_queryset(self):
+        queryset = self.queryset.all()
+        return queryset
 
 
 

@@ -1,9 +1,9 @@
-from rest_framework_mongoengine import serializers 
+from rest_framework_mongoengine import serializers as mongoserializers
 from api.models.event_model import Event
 
 #-- Get the Event and information about its Category
 
-class GetEventSerializer(serializers.DocumentSerializer):
+class GetEventSerializer(mongoserializers.DocumentSerializer):
 
     class Meta:
         model = Event
@@ -22,7 +22,7 @@ class GetEventSerializer(serializers.DocumentSerializer):
 
 #-- Get the Event without information about its Category (only reference)
 
-class EventSerializer(serializers.DocumentSerializer):
+class EventSerializer(mongoserializers.DocumentSerializer):
 
     class Meta:
         model = Event

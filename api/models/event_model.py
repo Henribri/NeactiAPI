@@ -15,8 +15,3 @@ class Event(Document):
     all_people=IntField(default=0)
     description=StringField(max_length=100, default='No description')
     category=ReferenceField('Category')
-
-
-
-
-
