@@ -7,11 +7,11 @@ from api.models.category_model import Category
 #-- Event model
 
 class Event(Document):
-    title=StringField(max_length=30, default='Event')
-    subtitle=StringField(max_length=50, default='No subtitle')
+    title=StringField(max_length=30)
+    subtitle=StringField(max_length=50)
     date_time=DateTimeField(default=timezone.now)
-    address=StringField(max_length=50, default='No address')
-    act_people=ListField(StringField(), default=[])
-    all_people=IntField(default=0)
-    description=StringField(max_length=100, default='No description')
+    address=StringField(max_length=50)
+    act_people=ListField(StringField())
+    all_people=IntField()
+    description=StringField(max_length=100)
     category=ReferenceField('Category')
