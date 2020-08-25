@@ -8,6 +8,9 @@ urlpatterns = [
     path('events/', event_view.EventList.as_view()),
     path('events/<slug:pk>/', event_view.EventDetail.as_view()),
 
+    path('user_events/<slug:userId>/', event_view.UserEventList.as_view()),
+    path('user_no_events/<slug:userId>/', event_view.UserNoEventList.as_view()),
+
 
 
     path('category/', category_view.CategoryList.as_view()),
