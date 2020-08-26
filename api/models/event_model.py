@@ -9,7 +9,7 @@ from api.models.category_model import Category
 class Event(Document):
     title=StringField(max_length=30)
     subtitle=StringField(max_length=50)
-    date_time=DateTimeField(default=timezone.now)
+    date_time=DateTimeField()
     address=StringField(max_length=50)
     act_people=ListField(StringField())
     all_people=IntField()

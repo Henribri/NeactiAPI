@@ -20,12 +20,10 @@ class EventList(generics.ListCreateAPIView):
         return EventSerializer 
 
     def get_queryset(self):
-        queryset = self.queryset.all()
+        queryset = Event.objects(date_time__gte=timezone.now()).all()
         return queryset
     
-    queryset = Event.objects(date_time__gte=timezone.now()).all()
-    filter_backends = (filters.SearchFilter)
-    filter_fields = ('title')
+
 
 
 
@@ -35,7 +33,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method == 'GET':
             return GetEventSerializer
         return EventSerializer 
-    queryset = Event.objects.all()
+    queryset = Event.objects().all()
 
     def get_queryset(self):
         queryset = self.queryset.all()
