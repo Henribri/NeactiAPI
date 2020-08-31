@@ -1,9 +1,25 @@
 from rest_framework_mongoengine import serializers as mongoserializers
-from api.models.event_model import Event
+from api.models.event_model import Event, Address
+
+
+#-- Serialize address of event
+
+class AddressEventSerializer(mongoserializers.EmbeddedDocumentSerializer):
+
+    class Meta:
+        model=Address
+        fields=(
+            'name',
+            'lat',
+            'lon'
+        )
+
+
 
 #-- Get the Event and information about its Category
 
 class GetEventSerializer(mongoserializers.DocumentSerializer):
+    address=AddressEventSerializer()
 
     class Meta:
         model = Event
