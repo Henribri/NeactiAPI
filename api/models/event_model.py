@@ -10,6 +10,7 @@ class Address(EmbeddedDocument):
     name=StringField()
     lat=FloatField()
     lon=FloatField()
+    placeId=StringField()
 
 
 #-- Event model
