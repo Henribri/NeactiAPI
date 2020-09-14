@@ -25,7 +25,7 @@ class GetEventSerializer(mongoserializers.DocumentSerializer):
         model = Event
         fields = ('id',
             'title',
-            'subtitle',
+            #'subtitle',
             'date_time',
             'address',
             'act_people',
@@ -44,7 +44,7 @@ class EventSerializer(mongoserializers.DocumentSerializer):
         model = Event
         fields = ('id',
                   'title',
-                  'subtitle',
+                  #'subtitle',
                   'date_time',
                   'address',
                   'act_people',

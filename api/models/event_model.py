@@ -16,11 +16,11 @@ class Address(EmbeddedDocument):
 #-- Event model
 
 class Event(Document):
-    title=StringField(max_length=30)
-    subtitle=StringField(max_length=50)
+    title=StringField()
+    #subtitle=StringField(max_length=50)
     date_time=DateTimeField()
     address=EmbeddedDocumentField(Address)
     act_people=ListField(StringField())
     all_people=IntField()
-    description=StringField(max_length=100)
+    description=StringField()
     category=ReferenceField('Category')
