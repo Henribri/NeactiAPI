@@ -50,8 +50,7 @@ class UserEventList(generics.ListAPIView):
 class UserNoEventList(generics.ListAPIView):
     def get_queryset(self):
         queryset = Event.objects(act_people__nin=[self.kwargs['userId']], date_time__gte=timezone.now()).aggregate([
-            {"$match": {
-                "$expr": {"$lt": ["this.act_people.length", "this.all_people"]}}}
-        ])
+  { "$match": { "$expr": { "$lt": [ {"$size":"$act_people"} , "$all_people"] } } }
+])
         return queryset
     serializer_class = GetEventSerializer
