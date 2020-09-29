@@ -1,15 +1,16 @@
 from api.models.event_model import Event
 from api.serializers.event_serializer import GetEventSerializer, EventSerializer
 from rest_framework import generics
-from datetime import datetime 
+from datetime import datetime
 from django.utils import timezone
 from rest_framework import filters
+from django.db.models import F, Sum
 
 
-#-- Specifies the query and the serializer to use
-#-- in function of the type of the request for Event
+# -- Specifies the query and the serializer to use
+# -- in function of the type of the request for Event
 
-#-- General Event List
+# -- General Event List
 class EventList(generics.ListCreateAPIView):
 
     def get_serializer_class(self):
@@ -17,22 +18,18 @@ class EventList(generics.ListCreateAPIView):
             return GetEventSerializer
         if self.request.method == 'POST':
             return EventSerializer
-        return EventSerializer 
+        return EventSerializer
 
     def get_queryset(self):
         queryset = Event.objects(date_time__gte=timezone.now()).all()
         return queryset
-    
-
-
-
 
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetEventSerializer
-        return EventSerializer 
+        return EventSerializer
     queryset = Event.objects().all()
 
     def get_queryset(self):
@@ -40,18 +37,21 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
         return queryset
 
 
-
-#-- List of Events that User have registered
+# -- List of Events that User have registered
 class UserEventList(generics.ListAPIView):
     def get_queryset(self):
-        queryset = Event.objects(act_people__in=[self.kwargs['userId']], date_time__gte=timezone.now()).all()
+        queryset = Event.objects(
+            act_people__in=[self.kwargs['userId']], date_time__gte=timezone.now()).all()
         return queryset
-    serializer_class=GetEventSerializer
+    serializer_class = GetEventSerializer
 
 
-#-- List of Events that User have bot registered
+# -- List of Events that User have not registered
 class UserNoEventList(generics.ListAPIView):
     def get_queryset(self):
-        queryset = Event.objects(act_people__nin=[self.kwargs['userId']], date_time__gte=timezone.now()).all()
+        queryset = Event.objects(act_people__nin=[self.kwargs['userId']], date_time__gte=timezone.now()).aggregate([
+            {"$match": {
+                "$expr": {"$lt": ["this.act_people.length", "this.all_people"]}}}
+        ])
         return queryset
-    serializer_class=GetEventSerializer
+    serializer_class = GetEventSerializer
