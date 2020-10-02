@@ -1,10 +1,9 @@
-from api.models.event_model import Event
+from api.models.event_model import Event, Category
 from api.serializers.event_serializer import GetEventSerializer, EventSerializer
 from rest_framework import generics
 from datetime import datetime
 from django.utils import timezone
 from rest_framework import filters
-from django.db.models import F, Sum
 
 
 # -- Specifies the query and the serializer to use
@@ -49,8 +48,28 @@ class UserEventList(generics.ListAPIView):
 # -- List of Events that User have not registered
 class UserNoEventList(generics.ListAPIView):
     def get_queryset(self):
-        queryset = Event.objects(act_people__nin=[self.kwargs['userId']], date_time__gte=timezone.now()).aggregate([
-  { "$match": { "$expr": { "$lt": [ {"$size":"$act_people"} , "$all_people"] } } }
-])
+        queryset = Event.objects(act_people__nin=[self.kwargs['userId']], date_time__gte=timezone.now()).aggregate(*[
+
+      {"$lookup": {
+                "from": Category._get_collection_name(),  # Tag collection database name
+                "foreignField": "_id",  # Primary key of the Tag collection
+                "localField": "category",  # Reference field
+                "as": "category",
+            }}, {"$unwind": "$category"},
+            {"$match": {
+                "$expr": {"$lt": [{"$size": "$act_people"}, "$all_people"]}}},
+                {
+      "$addFields":
+       {
+          "id":"$_id"
+       }
+  }
+
+
+        ])
+
+
         return queryset
+
+        
     serializer_class = GetEventSerializer
