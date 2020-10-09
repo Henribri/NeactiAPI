@@ -55,9 +55,6 @@ class EventSerializer(mongoserializers.DocumentSerializer):
 
 ### Check if people clicked in the same time
     def validate_act_people(self, value):
-        print(len(value))
-        print(len(self.instance["act_people"]))
-        print(len(self.initial_data["act_people"]))
         if (len(value)==len(self.instance["act_people"]) or (len(value)-len(self.instance["act_people"])>1) or (len(self.instance["act_people"])-len(value)>1)):
                raise mongoserializers.me_ValidationError("Click on same time !")
         return value
