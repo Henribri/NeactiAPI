@@ -29,10 +29,9 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method == 'GET':
             return GetEventSerializer
         return EventSerializer
-    queryset = Event.objects().all()
 
-    def get_queryset(self):
-        queryset = self.queryset.all()
+    def get_queryset(self):        
+        queryset = Event.objects.all()       
         return queryset
 
 
