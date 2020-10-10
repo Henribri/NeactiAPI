@@ -44,7 +44,6 @@ class EventSerializer(mongoserializers.DocumentSerializer):
         model = Event
         fields = ('id',
                   'title',
-                  # 'subtitle',
                   'date_time',
                   'address',
                   'act_people',
@@ -54,7 +53,22 @@ class EventSerializer(mongoserializers.DocumentSerializer):
                   )
 
 ### Check if people clicked in the same time
-    def validate_act_people(self, value):
+    def validate_act_people(self, value):       
         if (len(value)==len(self.instance["act_people"]) or (len(value)-len(self.instance["act_people"])>1) or (len(self.instance["act_people"])-len(value)>1)):
                raise mongoserializers.me_ValidationError("Click on same time !")
         return value
+
+
+class PostEventSerializer(mongoserializers.DocumentSerializer):
+    address = AddressEventSerializer()
+    class Meta:
+        model = Event
+        fields = ('id',
+                  'title',
+                  'date_time',
+                  'address',
+                  'act_people',
+                  'all_people',
+                  'description',
+                  'category'
+                  )
